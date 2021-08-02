@@ -1,0 +1,14 @@
+{
+    "identifier": "deeemm.arduino",
+    "name": "Arduino",
+    "organization": "DeeEmm",
+    "version": "1.0",
+    "categories": ["languages"],
+    "description": "Arduino language definition for Nova.",
+    "author": "DeeEmm",
+    "license":"GPL3",
+    "repository":"https://github.com/DeeEmm/nova-arduino",
+    "bugs": {
+        "email": "mailto:deeemm@deeemm.com"
+      }
+}

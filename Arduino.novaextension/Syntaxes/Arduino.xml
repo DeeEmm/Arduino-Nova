@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syntax name="arduino">
+    <meta>
+        <name>Arduino</name>
+        <type>compiled</type>
+        <preferred-file-extension>ino</preferred-file-extension>
+    </meta>
+    
+    <detectors>
+        <extension priority="1.0">ino, h, c, cpp</extension>
+    </detectors>
+    
+    <indentation>
+        <increase>
+            <expression>(\{[^}]*$)</expression>
+        </increase>
+        <decrease>
+            <expression>^\s*(\s*/\*.*\*/\s*)*[\}]</expression>
+        </decrease>
+    </indentation>
+    
+    <comments>
+        <single>
+            <expression>//</expression>
+        </single>
+        <multiline>
+            <starts-with>
+                <expression>/*</expression>
+            </starts-with>
+            <ends-with>
+                <expression>*/</expression>
+            </ends-with>
+        </multiline>
+    </comments>
+    
+    <brackets>
+        <pair open="{" close="}" />
+        <pair open="[" close="]" />
+        <pair open="(" close=")" />
+        <pair open="&quot;" close="&quot;" />
+    </brackets>
+    
+    <surrounding-pairs>
+        <pair open="&lt;" close="&gt;" />
+        <pair open="{" close="}" />
+        <pair open="[" close="]" />
+        <pair open="(" close=")" />
+        <pair open="&apos;" close="&apos;" />
+        <pair open="&quot;" close="&quot;" />
+        <pair open="`" close="`" />
+    </surrounding-pairs>
+    
+   <scopes>
+       <include syntax="self" collection="comments" />
+       <include syntax="self" collection="definitions" />
+       <include syntax="self" collection="keywords" />
+       <include syntax="self" collection="values" />
+       <include syntax="self" collection="identifiers" />
+       <include syntax="self" collection="syntax" />
+       <include syntax="self" collection="statics" />
+       <include syntax="self" collection="strings" />
+   </scopes>
+   
+   
+   
+   <collections>
+             
+       <collection name="comments">
+            <scope name="arduino.comment.single.shebang">
+                <expression>^\#!(.*)$</expression>
+                <capture number="1" name="arduino.comment.content" />
+            </scope>
+            <scope name="arduino.comment.single" spell-check="true">
+                <expression>\/\/(.*)$</expression>
+                <capture number="1" name="arduino.comment.content" />
+            </scope>
+            <scope name="arduino.comment.block" spell-check="true">
+                <symbol type="comment">
+                    <context behavior="subtree" />
+                </symbol>
+                <starts-with>
+                    <expression>\/\*</expression>
+                </starts-with>
+                <ends-with>
+                    <expression>\*\/</expression>
+                </ends-with>
+            </scope>
+       </collection>
+       
+
+       <collection name="definitions">
+           <scope name="arduino.definition.function">
+               <symbol type="function" />
+               <starts-with>
+                   <expression>(?:(function)\s+)?([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=\(\s*\))</expression>
+                   <capture number="1" name="arduino.keyword" />
+                   <capture number="2" name="arduino.identifier.function.name" />
+               </starts-with>
+               <ends-with>
+                   <expression>(?=\{)|$</expression>
+               </ends-with>
+           </scope>
+       </collection>
+       
+       
+       <collection name="keywords">
+       
+           <scope name="arduino.keyword.builtin-command">
+               <strings>
+                   <string>unsigned</string>
+                   <string>void</string>
+                   <string>boolean</string>
+                   <string>char</string>
+                   <string>byte</string>
+                   <string>int</string>
+                   <string>word</string>
+                   <string>long</string>
+                   <string>short</string>
+                   <string>float</string>
+                   <string>double</string>
+                   <string>string</string>
+                   <string>String</string>
+                   <string>array</string>
+               </strings>
+           </scope>
+           
+           <scope name="arduino.keyword.extras">
+               <strings>
+                   <string>sizeof</string>
+                   <string>PROGMEM</string>
+                   <string>pinMode</string>
+                   <string>digitalWrite</string>
+                   <string>digitalRead</string>
+                   <string>analogReference</string>
+                   <string>analogRead</string>
+                   <string>analogWrite</string>
+                   <string>Zero</string>
+                   <string>analogReadResolution</string>
+                   <string>analogWriteResolution</string>
+                   <string>tone</string>
+                   <string>notone</string>
+                   <string>shiftOut</string>
+                   <string>shiftIn</string>
+                   <string>pulseIn</string>
+                   <string>millis</string>
+                   <string>micros</string>
+                   <string>delay</string>
+                   <string>delayMicroseconds</string>
+                   <string>min</string>
+                   <string>max</string>
+                   <string>abs</string>
+                   <string>constrain</string>
+                   <string>map</string>
+                   <string>pow</string>
+                   <string>sqrt</string>
+                   <string>sin</string>
+                   <string>cos</string>
+                   <string>tan</string>                
+                   <string>isAlphaNumeric</string>
+                   <string>isAlpha</string>
+                   <string>isAscii</string>
+                   <string>isWhitespace</string>
+                   <string>isControl</string>
+                   <string>isDigit</string>
+                   <string>isGraph</string>
+                   <string>isLowerCase</string>
+                   <string>isPrintable</string>
+                   <string>isPunct</string>
+                   <string>isSpace</string>
+                   <string>isUpperCase</string>
+                   <string>isHexadecimalDigit</string>               
+                   <string>randomSeed</string>
+                   <string>random</string>                                
+                   <string>lowByte</string>
+                   <string>highByte</string>
+                   <string>bitRead</string>
+                   <string>bitWrite</string>
+                   <string>bitSet</string>
+                   <string>bitClear</string>
+                   <string>bit</string>                                
+                   <string>attachInterrupt</string>
+                   <string>detachInterrupt</string>                                
+                   <string>interrupts</string>
+                   <string>noInterrupts</string>                                                
+                   <string>Serial</string>
+                   <string>Stream</string>
+                   <string>Keyboard</string>
+                   <string>Mouse</string>
+               </strings>
+           </scope>
+       </collection>
+       
+       
+       
+       <collection name="values">
+           <scope name="arduino.escape">
+               <expression>\</expression>
+           </scope>
+           
+           <scope name="arduino.value.boolean">
+               <strings>
+                   <string>true</string>
+                   <string>false</string>
+               </strings>
+           </scope>
+           
+           <scope name="arduino.value.number">
+               <expression>
+                   (-)? # sign
+                   (
+                       \b\d+(\.\d*)? # 0, 0., 0.0
+                       | \.\d+ # .0
+                   )
+                   ((e|E)(\+|-)?\d+)? # exponent
+                   \b
+               </expression>
+           </scope>
+       </collection>
+       
+       
+       
+       <collection name="identifiers">
+           <scope name="arduino.identifier.global.argument">
+               <expression>\$(0|(?:[1-9][0-9]*))</expression>
+           </scope>
+           <scope name="arduino.identifier.variable">
+               <expression>(\b[a-zA-Z_][A-Za-z0-9_]*)(?==)</expression>
+           </scope>
+           <!-- <scope name="arduino.identifier.function">
+               <expression>\b(?<!\.)([a-zA-Z_][a-zA-Z0-9_]*)(?=\()\b</expression>
+           </scope> -->
+           <scope name="arduino.identifier">
+               <expression>\b[a-zA-Z_][A-Za-z0-9_]*\b</expression>
+           </scope>
+           <!-- <scope name="arduino.identifier.global.special">
+               <expression>\$[\!\#\$\*\-\?\@\_\<]</expression>
+           </scope> -->
+       </collection>
+       
+       
+       <collection name="syntax">
+           <scope name="arduino.bracket">
+               <expression>[\(\[\{\)\]\}]</expression>
+           </scope>
+           <!-- <scope name="arduino.operator.argument">
+               <expression>(?<=\s)(\-[a-zA-Z0-9_]+)|(\-\-[a-zA-Z_][a-zA-Z0-9-_]*)</expression>
+           </scope>
+           <scope name="arduino.operator">
+               <expression>,|;|&&|&|\|\||\||\^|==|=|!=|!|~|\+\+|\-\-|\+|\-|\+=|\-=|\*=|/=|%=|&=\|=|\*\*|\*|/|%|<<|>>|<=|>=|<|></expression>
+           </scope> -->
+       </collection>
+       
+       
+       <collection name="statics">
+           <scope name="arduino.static.import">
+               <strings>
+                   <string>#include</string>
+                   <string>#define</string>
+                   <string>#pragma</string>
+               </strings>
+           </scope>
+           
+           <scope name="arduino.static.declaration">
+               <strings>
+                   <string>static</string>
+                   <string>volatile</string>
+                   <string>const</string>
+                   <string>extern</string>
+               </strings>
+           </scope>
+           
+           <scope name="arduino.static.constant">
+               <strings>
+                   <string>HIGH</string>
+                   <string>LOW</string>
+                   <string>INPUT</string>
+                   <string>OUTPUT</string>
+                   <string>INPUT_PULLUP</string>
+                   <string>LED_BUILTIN</string>
+                   <string>true</string>
+                   <string>false</string>
+               </strings>
+           </scope>        
+           
+           <scope name="arduino.static.condition">
+               <strings>
+                   <string>switch</string>
+                   <string>case</string>
+                   <string>do</string>
+                   <string>for</string>
+                   <string>while</string>
+                   <string>if</string>
+                   <string>endif</string>
+                   <string>elif</string>
+                   <string>else</string>
+               </strings>
+           </scope>            
+   
+           <scope name="arduino.static.processor">
+               <strings>
+                   <string>break</string>
+                   <string>continue</string>
+                   <string>return</string>
+                   <string>goto</string>
+               </strings>
+           </scope>
+           
+           <scope name="arduino.static.declaration">
+               <strings>
+                   <string>class</string>
+                   <string>static</string>
+                   <string>public</string>
+                   <string>private</string>
+                   <string>using</string>
+               </strings>
+           </scope>
+       </collection>
+ 
+ 
+
+       <collection name="strings">
+           <scope name="arduino.string.double-quoted">
+               <starts-with>
+                   <expression>"</expression>
+               </starts-with>
+               <ends-with>
+                   <expression>(\\\\)*"</expression>
+               </ends-with>
+           </scope>
+       </collection>
+       
+
+   </collections>
+</syntax>
