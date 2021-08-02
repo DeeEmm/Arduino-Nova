@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<completions>
+    <provider>
+        <selector>arduino</selector>
+        <expression>\b[a-zA-Z0-9-_]*</expression>
+        <set>arduino.entities</set>
+    </provider>
+    
+    <set name="arduino.entities">
+        <completion string="unsigned" />
+        <completion string="void" />
+        <completion string="boolean" />
+        <completion string="char" />
+        <completion string="byte" />
+        <completion string="int" />
+        <completion string="word" />
+        <completion string="long" />
+        <completion string="short" />
+        <completion string="float" />
+        <completion string="double" />
+        <completion string="string" />
+        <completion string="String" />
+        <completion string="array" />
+        <completion string="sizeof" />
+        <completion string="PROGMEM" />
+        <completion string="pinMode" />
+        <completion string="digitalWrite" />
+        <completion string="digitalRead" />
+        <completion string="analogReference" />
+        <completion string="analogRead" />
+        <completion string="analogWrite" />
+        <completion string="Zero" />
+        <completion string="analogReadResolution" />
+        <completion string="analogWriteResolution" />
+        <completion string="tone" />
+        <completion string="notone" />
+        <completion string="shiftOut" />
+        <completion string="shiftIn" />
+        <completion string="pulseIn" />
+        <completion string="millis" />
+        <completion string="micros" />
+        <completion string="delay" />
+        <completion string="delayMicroseconds" />
+        <completion string="min" />
+        <completion string="max" />
+        <completion string="abs" />
+        <completion string="constrain" />
+        <completion string="map" />
+        <completion string="pow" />
+        <completion string="sqrt" />
+        <completion string="sin" />
+        <completion string="cos" />
+        <completion string="tan" />                
+        <completion string="isAlphaNumeric" />
+        <completion string="isAlpha" />
+        <completion string="isAscii" />
+        <completion string="isWhitespace" />
+        <completion string="isControl" />
+        <completion string="isDigit" />
+        <completion string="isGraph" />
+        <completion string="isLowerCase" />
+        <completion string="isPrintable" />
+        <completion string="isPunct" />
+        <completion string="isSpace" />
+        <completion string="isUpperCase" />
+        <completion string="isHexadecimalDigit" />               
+        <completion string="randomSeed" />
+        <completion string="random" />                                
+        <completion string="lowByte" />
+        <completion string="highByte" />
+        <completion string="bitRead" />
+        <completion string="bitWrite" />
+        <completion string="bitSet" />
+        <completion string="bitClear" />
+        <completion string="bit" />                                
+        <completion string="attachInterrupt" />
+        <completion string="detachInterrupt" />                                
+        <completion string="interrupts" />
+        <completion string="noInterrupts" />                                                
+        <completion string="Serial" />
+        <completion string="Stream" />
+        <completion string="Keyboard" />
+        <completion string="Mouse" />
+        <completion string="#include" />
+        <completion string="#define" />
+        <completion string="static" />
+        <completion string="volatile" />
+        <completion string="const" />
+        <completion string="extern" />
+        <completion string="HIGH" />
+        <completion string="LOW" />
+        <completion string="INPUT" />
+        <completion string="OUTPUT" />
+        <completion string="INPUT_PULLUP" />
+        <completion string="LED_BUILTIN" />
+        <completion string="true" />
+        <completion string="false" />
+        <completion string="switch" />
+        <completion string="case" />
+        <completion string="do" />
+        <completion string="for" />
+        <completion string="while" />
+        <completion string="if" />
+        <completion string="endif" />
+        <completion string="elif" />
+        <completion string="else" />
+        <completion string="break" />
+        <completion string="continue" />
+        <completion string="return" />
+        <completion string="goto" />
+        <completion string="class" />
+        <completion string="static" />
+        <completion string="public" />
+        <completion string="private" />
+        <completion string="using" />
+    </set>
+</completions>
