@@ -93,11 +93,16 @@
       <collection name="definitions">
         <scope name="arduino.definition.function">
             <symbol type="function" />
-            <expression>(?:(void|string|int|bool|String|char|float|long|word|double|byte|boolean|array)\**\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(\([a-zA-Z0-9_,*\s]*\))([^;]))</expression>
+            <starts-with>
+                 <expression>(?:(void|string|int|bool|String|char|float|long|word|double|byte|boolean|array)\**\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(\([a-zA-Z0-9_,*\s]*\))([^;]))</expression>
+             </starts-with>
+             <ends-with>
+                 <expression>(?=[\{])</expression>
+             </ends-with>
         </scope>
         <scope name="arduino.definition.struct">
            <symbol type="struct" />
-           <expression>(?:(struct)\**\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*([\{]))</expression>
+           <expression>(?:(struct)\**\s+([a-zA-Z_][a-zA-Z0-9_]*))</expression>
        </scope>
       </collection>
       
@@ -254,7 +259,7 @@
       
       <collection name="statics">
         <scope name="arduino.static.import">
-            <symbol type="static" />
+            <symbol type="reference" />
             <strings>
                 <string>#include</string>
                 <string>#define</string>

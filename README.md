@@ -8,10 +8,37 @@
 Arduino currently supports the following features:
 
 - Code Highlighting
-- Auto Completion
+- Collections listed in sidebar:
+  - Functions
+  - Structs
+- ~~ Auto Completion~~ (Please note that support for auto completion is currently very limited)
 
 
-Please note that support for auto completion is currently limited
+## Usage
+
+Function and struct collections are listed in the sidebar provided that they follow standard lexical grammar...
+
+```
+void myFunction() {
+	doSomething();
+}
+
+void myOtherFunction() 
+{
+	doSomethingElse();
+}
+
+struct myStruct {
+	int myInt = 1;
+}
+
+struct myOtherStruct 
+{
+	float myfloat = 1.1;
+}
+```
+
+
 
 
 ## Support
