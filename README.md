@@ -1,7 +1,7 @@
 **Arduino** provides syntax highlighting and autocompletion for the Arduino programming language within the Nova IDE.
 
 
-![](https://nova.app/images/en/dark/editor.png)
+![](https://raw.githubusercontent.com/DeeEmm/Arduino-Nova/main/Arduino.novaextension/Images/editor.png)
 
 ## Features
 
