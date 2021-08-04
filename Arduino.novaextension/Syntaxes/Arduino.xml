@@ -94,7 +94,7 @@
         <scope name="arduino.definition.function">
             <symbol type="function" />
             <starts-with>
-                 <expression>(?:(void|string|int|bool|String|char|float|long|word|double|byte|boolean|array)\**\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(\([a-zA-Z0-9_,*\s]*\))([^;]))</expression>
+                 <expression>(?:(void|string|int|bool|String|char|float|long|word|double|byte|boolean|array|uint16_t)\**\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(\([a-zA-Z0-9_,*\s]*\))([^;]))</expression>
              </starts-with>
              <ends-with>
                  <expression>(?=[\{])</expression>
@@ -126,6 +126,7 @@
                 <string>string</string>
                 <string>String</string>
                 <string>array</string>
+                <string>uint16_t</string>
             </strings>
         </scope>
         
