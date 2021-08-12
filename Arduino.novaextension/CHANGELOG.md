@@ -6,3 +6,4 @@
 - V 1.3 11/08/21 - Removed Struct 'extern' statements from tree
 - V 1.4 11/08/21 - Added pointed brackets to Class method filtering
 - V 1.5	12/08/21 - Fixed single quote string highlighting
+- V 1.6	12/08/21 - Updated changelog + support links

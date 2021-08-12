@@ -7,7 +7,7 @@
     "description": "Arduino language definition for Nova.",
     "author": "DeeEmm",
     "license":"GPL3",
-    "repository":"https://github.com/DeeEmm/nova-arduino",
+    "repository":"https://github.com/DeeEmm/arduino-nova",
     "bugs": {
         "email": "mailto:deeemm@deeemm.com"
       }
