@@ -38,6 +38,7 @@
         <pair open="[" close="]" />
         <pair open="(" close=")" />
         <pair open="&quot;" close="&quot;" />
+        <pair open="&apos;" close="&apos;" />
     </brackets>
     
     <surrounding-pairs>
@@ -53,17 +54,19 @@
    <scopes>  
       <include syntax="self" collection="comments" />
       <include syntax="self" collection="definitions" />
+      <include syntax="self" collection="operators" />
       <include syntax="self" collection="keywords" />
       <include syntax="self" collection="values" />
       <include syntax="self" collection="identifiers" />
       <include syntax="self" collection="syntax" />
+      <include syntax="self" collection="processing" />
       <include syntax="self" collection="statics" />
       <include syntax="self" collection="strings" />
    </scopes>
    
    
    
-   <collections>
+   <collections >
              
 
            
@@ -87,6 +90,11 @@
                  <expression>\*\/</expression>
              </ends-with>
          </scope>
+         <subscopes>
+            <include syntax="self" collection="keywords" />
+            <include syntax="self" collection="syntax" />
+            <include syntax="self" collection="statics" />
+         </subscopes>         
       </collection>      
       
       
@@ -94,23 +102,80 @@
         <scope name="arduino.definition.function">
             <symbol type="function" />
             <starts-with>
-                 <expression>(?:(void|string|int|bool|String|char|float|long|word|double|byte|boolean|array|uint16_t)\**\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(\([a-zA-Z0-9_,*\s]*\))([^;]))</expression>
+                 <expression>(?:(void|string|int|bool|String|char|float|long|word|double|byte|boolean|array|uint16_t)\**\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(\([a-zA-Z0-9_,*=\s]*\))([^;]))</expression>
              </starts-with>
              <ends-with>
                  <expression>(?=[\{])</expression>
              </ends-with>
         </scope>
+         <scope name="arduino.definition.method">
+            <symbol type="method" />
+            <starts-with>
+                 <expression>(?:(void|string|int|bool|String|char|float|long|word|double|byte|boolean|array|uint16_t)*\s+([a-zA-Z_][a-zA-Z0-9_]*)\:\:([a-zA-Z0-9_]+)\s*(\([a-zA-Z0-9_,*=\s&lt;&gt;]*\))([^;]))</expression>
+             </starts-with>
+             <ends-with>
+                 <expression>(?=[\{])</expression>
+             </ends-with>
+         </scope>
         <scope name="arduino.definition.struct">
            <symbol type="struct" />
-           <expression>(?:(struct)\**\s+([a-zA-Z_][a-zA-Z0-9_]*))</expression>
+           <expression>(?:^(\s+)+(struct)\**\s+([a-zA-Z_][a-zA-Z0-9_]*))</expression>
        </scope>
+       <include syntax="self" collection="keywords" />
+       <include syntax="self" collection="values" />
+       <include syntax="self" collection="statics" />
       </collection>
       
       
+      <collection name="operators">
+         <scope name="arduino.operator">
+            <symbol type="operator"/>
+            <!--<expression>,|;|&&|&|\|\||\||\^|==|=|!=|!|~|\+\+|\-\-|\+|\-|\+=|\-=|\*=|/=|%=|&=\|=|\*\*|\*|/|%|<<|>>|<=|>=|<|></expression>-->
+            <expression>(?:([&amp;&amp;]*))</expression>
+            <expression>(?:([\=]*))</expression>
+            <expression>(?:([\/]*))</expression>
+            <expression>(?:([\*]*))</expression>
+            <expression>(?:([\+]*))</expression>
+            <expression>(?:([\-]*))</expression>
+            <expression>(?:([\%]*))</expression>
+            <expression>(?:([\|]*))</expression>
+            <expression>(?:([\!\=]*))</expression>
+            <expression>(?:([&lt;]*))</expression>
+            <expression>(?:([&lt;\=]*))</expression>
+            <expression>(?:([\=\=]*))</expression>
+            <expression>(?:([&gt;]*))</expression>
+            <expression>(?:([&gt;\=]*))</expression>         
+            <expression>(?:([\-&gt;]*))</expression>
+         </scope>   
+         <scope name="arduino.operator.argument">
+            <expression>(?=\s)(\-[a-zA-Z0-9_]+)|(\-\-[a-zA-Z_][a-zA-Z0-9-_]*)</expression>
+         </scope>
+      </collection>
+      
       <collection name="keywords">
       
-        <scope name="arduino.keyword.builtin-command">
-            <symbol type="keyword" />
+      
+         <scope name="arduino.keyword.condition" spell-check="true">
+            <symbol type="keyword">
+               <context behavior="subtree" />
+            </symbol>
+            <strings>
+                <string>switch</string>
+                <string>case</string>
+                <string>do</string>
+                <string>for</string>
+                <string>while</string>
+                <string>if</string>
+                <string>endif</string>
+                <string>elif</string>
+                <string>else</string>
+            </strings>
+         </scope>                     
+      
+         <scope name="arduino.keyword.builtin-command" spell-check="true">
+            <symbol type="keyword">
+               <context behavior="subtree" />
+            </symbol>
             <strings>
                 <string>unsigned</string>
                 <string>void</string>
@@ -128,9 +193,9 @@
                 <string>array</string>
                 <string>uint16_t</string>
             </strings>
-        </scope>
+         </scope>
         
-        <scope name="arduino.keyword.extras">
+        <scope name="arduino.keyword.extras" spell-check="true">
             <symbol type="keyword" />
             <strings>
                 <string>sizeof</string>
@@ -204,7 +269,7 @@
             <expression>\</expression>
         </scope>
         
-        <scope name="arduino.value.boolean">
+        <scope name="arduino.value.boolean" spell-check="true">
             <strings>
                 <string>true</string>
                 <string>false</string>
@@ -247,29 +312,23 @@
       
       <collection name="syntax">
         <scope name="arduino.bracket">
+            <symbol type="bracket"/>
             <expression>[\(\[\{\)\]\}]</expression>
         </scope>
-        <!-- <scope name="arduino.operator.argument">
-            <expression>(?<=\s)(\-[a-zA-Z0-9_]+)|(\-\-[a-zA-Z_][a-zA-Z0-9-_]*)</expression>
-        </scope>
-        <scope name="arduino.operator">
-            <expression>,|;|&&|&|\|\||\||\^|==|=|!=|!|~|\+\+|\-\-|\+|\-|\+=|\-=|\*=|/=|%=|&=\|=|\*\*|\*|/|%|<<|>>|<=|>=|<|></expression>
-        </scope> -->
       </collection>
       
       
-      <collection name="statics">
-        <scope name="arduino.static.import">
-            <symbol type="reference" />
-            <strings>
-                <string>#include</string>
-                <string>#define</string>
-                <string>#pragma</string>
-            </strings>
+      <collection name="processing">
+        <scope name="arduino.processing" spell-check="true">
+            <symbol type="processing" />
+            <expression>(\#[ifdef|if defined|elif|endif|include|define|pragma]*)</expression>
         </scope>
+     </collection>
         
-        <scope name="arduino.static.declaration">
-            <symbol type="static-method" />
+      <collection name="statics">
+        <scope name="arduino.static.declaration" spell-check="true">
+            <!-- <symbol type="static-method" /> -->
+            <context behavior="subtree" />
             <strings>
                 <string>static</string>
                 <string>volatile</string>
@@ -278,8 +337,9 @@
             </strings>
         </scope>
         
-        <scope name="arduino.static.constant">
+        <scope name="arduino.static.constant" spell-check="true">
             <symbol type="constant" />
+            <context behavior="subtree" />
             <strings>
                 <string>HIGH</string>
                 <string>LOW</string>
@@ -292,22 +352,7 @@
             </strings>
         </scope>        
         
-        <scope name="arduino.static.condition">
-            <symbol type="static" />
-            <strings>
-                <string>switch</string>
-                <string>case</string>
-                <string>do</string>
-                <string>for</string>
-                <string>while</string>
-                <string>if</string>
-                <string>endif</string>
-                <string>elif</string>
-                <string>else</string>
-            </strings>
-        </scope>            
-      
-        <scope name="arduino.static.processor">
+        <scope name="arduino.static.processor" spell-check="true">
             <symbol type="static" />
             <strings>
                 <string>break</string>
@@ -317,7 +362,7 @@
             </strings>
         </scope>
         
-        <scope name="arduino.static.declaration">
+        <scope name="arduino.static.declaration" spell-check="true">
             <symbol type="class" />
             <strings>
                 <string>class</string>
@@ -340,6 +385,15 @@
                 <expression>(\\\\)*"</expression>
             </ends-with>
         </scope>
+        <scope name="arduino.string.single-quoted">
+           <starts-with>
+               <expression>'</expression>
+           </starts-with>
+           <ends-with>
+               <expression>(\\\\)*'</expression>
+           </ends-with>
+       </scope>
+
       </collection>
 
 
